@@ -35,6 +35,18 @@ ul {
     padding: 0 24px;
 }
 
+/* ===== SCROLL PROGRESS BAR ===== */
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: #1a3c6e;
+    z-index: 9999;
+    transition: width 0.1s;
+}
+
 /* ===== TYPOGRAPHY ===== */
 h1, h2, h3, h4 {
     font-weight: 700;
@@ -223,6 +235,17 @@ h3 { font-size: 1.3rem; }
 .hero {
     padding: 140px 0 80px;
     background: linear-gradient(135deg, #f8faff 0%, #eef4ff 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+#particles-js {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
 }
 
 .hero-container {
@@ -230,6 +253,8 @@ h3 { font-size: 1.3rem; }
     grid-template-columns: 1fr 1fr;
     gap: 60px;
     align-items: center;
+    position: relative;
+    z-index: 1;
 }
 
 .hero-tag {
@@ -244,6 +269,7 @@ h3 { font-size: 1.3rem; }
 .hero h1 {
     font-size: 3.2rem;
     margin-bottom: 20px;
+    min-height: 65px;
 }
 
 .hero-description {
@@ -302,6 +328,7 @@ h3 { font-size: 1.3rem; }
 
     .hero h1 {
         font-size: 2.4rem;
+        min-height: 50px;
     }
 }
 
@@ -322,13 +349,28 @@ h3 { font-size: 1.3rem; }
     padding: 30px 24px;
     border-radius: 12px;
     text-align: center;
-    transition: 0.3s ease;
+    transition: 0.4s ease;
     border: 1px solid #eef4ff;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.6s ease forwards;
 }
+
+.skill-card:nth-child(1) { animation-delay: 0.05s; }
+.skill-card:nth-child(2) { animation-delay: 0.15s; }
+.skill-card:nth-child(3) { animation-delay: 0.3s; }
+.skill-card:nth-child(4) { animation-delay: 0.45s; }
 
 .skill-card:hover {
     transform: translateY(-6px);
     box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .skill-icon {
@@ -366,7 +408,10 @@ h3 { font-size: 1.3rem; }
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-    transition: 0.3s ease;
+    transition: 0.4s ease;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.6s ease 0.2s forwards;
 }
 
 .work-card:hover {
@@ -462,6 +507,9 @@ h3 { font-size: 1.3rem; }
     border: 1px solid #eef4ff;
     max-width: 1100px;
     margin: 0 auto;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.6s ease 0.15s forwards;
 }
 
 .featured-portfolio {
@@ -550,7 +598,15 @@ h3 { font-size: 1.3rem; }
 
 .resume-block {
     margin-bottom: 40px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s ease forwards;
 }
+
+.resume-block:nth-child(1) { animation-delay: 0.05s; }
+.resume-block:nth-child(2) { animation-delay: 0.15s; }
+.resume-block:nth-child(3) { animation-delay: 0.25s; }
+.resume-block:nth-child(4) { animation-delay: 0.35s; }
 
 .resume-block h2 {
     font-size: 1.5rem;
@@ -606,6 +662,12 @@ h3 { font-size: 1.3rem; }
     gap: 60px;
 }
 
+.contact-info {
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: fadeInLeft 0.6s ease 0.1s forwards;
+}
+
 .contact-info h2 {
     margin-bottom: 16px;
     color: #1a3c6e;
@@ -642,7 +704,20 @@ h3 { font-size: 1.3rem; }
     color: #0f2a4f;
 }
 
-/* Contact Form */
+.contact-form {
+    opacity: 0;
+    transform: translateX(20px);
+    animation: fadeInRight 0.6s ease 0.2s forwards;
+}
+
+@keyframes fadeInLeft {
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+    to { opacity: 1; transform: translateX(0); }
+}
+
 .contact-form h2 {
     margin-bottom: 20px;
     color: #1a3c6e;
@@ -686,6 +761,16 @@ h3 { font-size: 1.3rem; }
     .contact-grid {
         grid-template-columns: 1fr;
         gap: 40px;
+    }
+
+    .contact-info {
+        transform: translateY(-20px);
+        animation-name: fadeInUp;
+    }
+
+    .contact-form {
+        transform: translateY(20px);
+        animation-name: fadeInUp;
     }
 }
 
@@ -731,33 +816,4 @@ footer {
     h2 { font-size: 1.6rem; }
     .section-title { font-size: 1.8rem; }
     .page-header h1 { font-size: 2rem; }
-}
-
-/* Fade-in animation for sections */
-.skill-card, .work-card, .portfolio-item {
-    opacity: 0;
-    transform: translateY(30px);
-    animation: fadeInUp 0.6s ease forwards;
-}
-
-.skill-card:nth-child(2) { animation-delay: 0.15s; }
-.skill-card:nth-child(3) { animation-delay: 0.3s; }
-.skill-card:nth-child(4) { animation-delay: 0.45s; }
-
-@keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.progress-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 0%;
-    height: 4px;
-    background: #1a3c6e;
-    z-index: 9999;
-    transition: width 0.1s;
 }
