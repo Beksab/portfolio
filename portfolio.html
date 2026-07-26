@@ -9,6 +9,9 @@
 </head>
 <body>
 
+<!-- ===== SCROLL PROGRESS BAR ===== -->
+<div class="progress-bar" id="scrollProgress"></div>
+
 <!-- ===== NAVIGATION ===== -->
 <header>
     <nav class="navbar">
@@ -50,7 +53,7 @@
                 <h3>Exit Exam Simulator</h3>
                 <p class="portfolio-tags">#html • #education • #webdevelopment</p>
                 <p>A comprehensive platform helping graduating students prepare for the national exit exam. The simulator covers five departments:</p>
-                <ul style="list-style: disc; padding-left: 20px; color: #4a4a6a; margin-bottom: 12px;">
+                <ul>
                     <li>Department of Management</li>
                     <li>Department of Logistics and Supply Chain Management</li>
                     <li>Department of Accounting and Finance</li>
@@ -69,7 +72,7 @@
 <!-- ===== FOOTER ===== -->
 <footer>
     <div class="container footer-container">
-        <p>&copy; 2026 Bereketeab Tsegaye. All rights reserved.</p>
+        <p>&copy; <span id="year"></span> Bereketeab Tsegaye. All rights reserved.</p>
         <p class="footer-small">
             All content on this website is the original work of Bereketeab Tsegaye unless otherwise noted.
             Third-party materials are used under fair use guidelines for educational purposes.
@@ -83,6 +86,18 @@
 </footer>
 
 <script>
+    // ===== SCROLL PROGRESS BAR =====
+    window.addEventListener('scroll', function() {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = (scrollTop / docHeight) * 100;
+        document.getElementById('scrollProgress').style.width = progress + '%';
+    });
+
+    // ===== AUTO-UPDATING YEAR =====
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ===== MOBILE HAMBURGER MENU =====
     document.querySelector('.hamburger').addEventListener('click', function() {
         document.querySelector('.nav-menu').classList.toggle('active');
         this.classList.toggle('active');
