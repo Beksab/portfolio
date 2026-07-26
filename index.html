@@ -9,6 +9,9 @@
 </head>
 <body>
 
+<!-- ===== SCROLL PROGRESS BAR ===== -->
+<div class="progress-bar" id="scrollProgress"></div>
+
 <!-- ===== NAVIGATION ===== -->
 <header>
     <nav class="navbar">
@@ -29,12 +32,13 @@
     </nav>
 </header>
 
-<!-- ===== HERO SECTION ===== -->
-<section class="hero">
+<!-- ===== HERO SECTION WITH PARTICLE BACKGROUND ===== -->
+<section class="hero" id="hero">
+    <div id="particles-js"></div>
     <div class="container hero-container">
         <div class="hero-content">
             <p class="hero-tag">Lecturer &amp; Head of Department</p>
-            <h1>Hi, I'm <span class="highlight">Bereketeab</span></h1>
+            <h1 id="typing-headline"></h1>
             <p class="hero-description">
                 Bereketeab Tsegaye is a Lecturer at the Ethiopian Defence University with five years of experience in higher education and currently serves as the Head of the Department of Management. He is passionate about leveraging technology to enhance teaching and learning, with a particular interest in integrating innovative digital tools that improve student engagement and learning outcomes.
             </p>
@@ -106,7 +110,7 @@
 <!-- ===== FOOTER ===== -->
 <footer>
     <div class="container footer-container">
-        <p>&copy; 2026 Bereketeab Tsegaye. All rights reserved.</p>
+        <p>&copy; <span id="year"></span> Bereketeab Tsegaye. All rights reserved.</p>
         <p class="footer-small">
             All content on this website is the original work of Bereketeab Tsegaye unless otherwise noted.
             Third-party materials are used under fair use guidelines for educational purposes.
@@ -119,34 +123,23 @@
     </div>
 </footer>
 
-<script>
-    document.querySelector('.hamburger').addEventListener('click', function() {
-        document.querySelector('.nav-menu').classList.toggle('active');
-        this.classList.toggle('active');
-    });
-</script>
+<!-- ===== SCRIPTS ===== -->
+<!-- Particles.js for background animation -->
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
 <script>
-    particlesJS('particles-js', {
-        particles: {
-            number: { value: 50, density: { enable: true, value_area: 800 } },
-            color: { value: '#1a3c6e' },
-            shape: { type: 'circle' },
-            opacity: { value: 0.3, random: false },
-            size: { value: 3, random: true },
-            line_linked: { enable: true, distance: 150, color: '#1a3c6e', opacity: 0.2, width: 1 },
-            move: { enable: true, speed: 2, direction: 'none', random: false, straight: false }
-        },
-        interactivity: {
-            detect_on: 'canvas',
-            events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' } }
-        }
+    // ===== SCROLL PROGRESS BAR =====
+    window.addEventListener('scroll', function() {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = (scrollTop / docHeight) * 100;
+        document.getElementById('scrollProgress').style.width = progress + '%';
     });
-</script>
-    <script>
+
+    // ===== DYNAMIC TYPING EFFECT =====
     document.addEventListener('DOMContentLoaded', function() {
         const text = "Hi, I'm Bereketeab";
-        const element = document.querySelector('.hero h1');
+        const element = document.getElementById('typing-headline');
         element.innerHTML = '';
         let i = 0;
         const speed = 80;
@@ -159,6 +152,70 @@
         }
         typeWriter();
     });
+
+    // ===== AUTO-UPDATING YEAR =====
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ===== MOBILE HAMBURGER MENU =====
+    document.querySelector('.hamburger').addEventListener('click', function() {
+        document.querySelector('.nav-menu').classList.toggle('active');
+        this.classList.toggle('active');
+    });
+
+    // ===== PARTICLES.JS CONFIGURATION =====
+    particlesJS('particles-js', {
+        particles: {
+            number: {
+                value: 50,
+                density: {
+                    enable: true,
+                    value_area: 800
+                }
+            },
+            color: {
+                value: '#1a3c6e'
+            },
+            shape: {
+                type: 'circle'
+            },
+            opacity: {
+                value: 0.3,
+                random: false
+            },
+            size: {
+                value: 3,
+                random: true
+            },
+            line_linked: {
+                enable: true,
+                distance: 150,
+                color: '#1a3c6e',
+                opacity: 0.2,
+                width: 1
+            },
+            move: {
+                enable: true,
+                speed: 2,
+                direction: 'none',
+                random: false,
+                straight: false
+            }
+        },
+        interactivity: {
+            detect_on: 'canvas',
+            events: {
+                onhover: {
+                    enable: true,
+                    mode: 'repulse'
+                },
+                onclick: {
+                    enable: true,
+                    mode: 'push'
+                }
+            }
+        }
+    });
 </script>
+
 </body>
 </html>
